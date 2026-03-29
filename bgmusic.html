@@ -1,0 +1,29 @@
+<script>
+window.onload = function() {
+  var music = document.getElementById("bgMusic");
+  var btn = document.querySelector("button");
+
+  function startMusic() {
+    music.volume = 0.2;
+    music.play().then(() => {
+      btn.innerHTML = "🔇 Mute";
+    }).catch(() => {
+      console.log("Autoplay blocked until interaction");
+    });
+
+    document.body.removeEventListener('click', startMusic);
+  }
+
+  document.body.addEventListener('click', startMusic);
+
+  window.toggleMusic = function() {
+    if (music.paused) {
+      music.play();
+      btn.innerHTML = "🔇 Mute";
+    } else {
+      music.pause();
+      btn.innerHTML = "🔊 Play";
+    }
+  }
+};
+</script>
